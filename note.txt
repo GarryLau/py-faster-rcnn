@@ -11,3 +11,5 @@ c. 对a),b)剩余的anchor，弃去不用；
 d. 跨越图像边界的anchor弃去不用。
 
 非极大值抑制nms可以在test阶段控制检出目标框的数量、重叠情况，nms越小则检出的目标框数量越少、重叠情况越少，通过调整nms的值可以很好的控制检出目标的重叠情况。
+
+faster rcnn利用rpn获取proposal，得到的proposal常常包含一些背景，也就是说faster rcnn区分目标、背景的能力不强。
