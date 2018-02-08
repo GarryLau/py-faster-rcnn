@@ -12,4 +12,4 @@ d. 跨越图像边界的anchor弃去不用。
 
 通过post-processing非极大值抑制nms可以在test阶段控制检出目标框的数量、重叠情况，nms越小则检出的目标框数量越少、重叠情况越少，通过调整nms的值可以很好的控制检出目标的重叠情况。
 
-faster rcnn利用rpn获取proposal，得到的proposal常常包含一些背景，也就是说faster rcnn区分目标、背景的能力不强。
+faster rcnn利用rpn获取proposal，得到的proposal常常包含一些背景，也就是说faster rcnn区分目标、背景的能力不强。YOLO在训练和预测过程中可以利用全图信息，faster rcnn会错误的将背景检测为目标原因在于faster rcnn在检测中无法看到全局图像，相比于fast rcnn，YOLO可以将背景预测错误率低一半。
