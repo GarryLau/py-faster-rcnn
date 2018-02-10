@@ -1,8 +1,8 @@
-在卷积层提取好特征之后分为两个分支，一个是rpn，另一个是和rpn出来的region proposal做分类和位置回归。
+在卷积层提取好特征之后分为两个分支，一个是RPN，另一个是和rpn出来的region proposal做分类和位置回归。
 
 假设在分支的地方卷积特征图大小是28*28，则特征图上有28*28*9个anchor，将这些anchor映射回原图则可以根据这些anchor在原图上的位置计算分类损失和位置损失。
 
-整个faster rcnn网络总共有四个（两对）损失，其中一对是rpn部分的region proposal分类、位置损失，另一对是最终的分类、位置损失。
+整个faster RCNN网络总共有四个（两对）损失，其中一对是rpn部分的region proposal分类、位置损失，另一对是最终的分类、位置损失。
 
 region proposal生成方法：将anchor（此处是指从卷积特征图映射到原图上的anchor），与groundtruth进行比较，根据重叠情况来确定anchor的取舍。具体地：
 a. 对每个groundtruth区域，与其重叠比例最大的anchor记为前景样本；
@@ -10,6 +10,8 @@ b. 对a)剩余的anchor，如果其与某个标定重叠比例大于0.7，记为
 c. 对a),b)剩余的anchor，弃去不用；
 d. 跨越图像边界的anchor弃去不用。
 
-通过post-processing非极大值抑制nms可以在test阶段控制检出目标框的数量、重叠情况，nms越小则检出的目标框数量越少、重叠情况越少，通过调整nms的值可以很好的控制检出目标的重叠情况。
+通过post-processing非极大值抑制NMS可以在test阶段控制检出目标框的数量、重叠情况，nms越小则检出的目标框数量越少、重叠情况越少，通过调整NMS的值可以很好的控制检出目标的重叠情况。
 
-faster rcnn利用rpn获取proposal，得到的proposal常常包含一些背景，也就是说faster rcnn区分目标、背景的能力不强。YOLO在训练和预测过程中可以利用全图信息，faster rcnn会错误的将背景检测为目标原因在于faster rcnn在检测中无法看到全局图像，相比于fast rcnn，YOLO可以将背景预测错误率低一半。
+faster RCNN利用RPN获取proposal，得到的proposal常常包含一些背景，也就是说faster RCNN区分目标、背景的能力不强。YOLO在训练和预测过程中可以利用全图信息，faster RCNN会错误的将背景检测为目标原因在于faster rcnn在检测中无法看到全局图像，相比于fast RCNN，YOLO可以将背景预测错误率低一半。
+
+faster RCNN、YOLO、SSD异曲同工之处在于，faster RCNN的anchor、YOLO中的网格、SSD中default box是相通的。
